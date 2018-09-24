@@ -9,6 +9,7 @@ class Organization(models.Model):
     """
     org_name = models.CharField("Organization Name",
                                 max_length=128)
+    org_url = models.URLField("Main Organization URL")
 
     class Meta():
         abstract = True
@@ -45,7 +46,10 @@ class StateAgency(Organization):
     TODO: Establish parent-agency hierarchy.
     """
 
-    agency_code = models.CharField(max_length=2)
+    agency_code = models.CharField("RIFANS Agency Code",
+                                   max_length=2)
+    duns_number = models.CharField("DUNS Number",
+                                   max_length=14)
 
     class Meta:
         verbose_name_plural = 'State Agencies'
@@ -53,8 +57,10 @@ class StateAgency(Organization):
 
 class SubRecipient(Organization):
     """
-
+    A recipient of State grant money. 
     """
+    duns_number = models.CharField("DUNS Number",
+                                   max_length=14)
 
     class Meta:
         verbose_name_plural = 'Sub-Recipients'
