@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1>Federal Agencies</h1>
+{% if all_feds_list %}
+<ul>
+  {% for agency in all_feds_list %}
+  <li>
+    <a href='{{agency.org_url}}'>{{agency.org_name}}</a>
+  </li>
+  {% endfor %}
+</ul>
+{% endif %}
+
+{% endblock content %}
