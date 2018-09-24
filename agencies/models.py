@@ -9,7 +9,9 @@ class Organization(models.Model):
     """
     org_name = models.CharField("Organization Name",
                                 max_length=128)
-    org_url = models.URLField("Main Organization URL")
+    org_url = models.URLField("Main Organization URL",
+                              blank=True,
+                              default='')
 
     class Meta():
         abstract = True
@@ -34,7 +36,8 @@ class FederalAgency(Organization):
     federal_hierarchy_level = models.CharField(
         "Federal Hierarchy Level",
         max_length=10,
-        choices=HIERARCHY
+        choices=HIERARCHY,
+        default='department'
     )
 
     class Meta:
@@ -44,12 +47,17 @@ class FederalAgency(Organization):
 class StateAgency(Organization):
     """
     TODO: Establish parent-agency hierarchy.
+    TODO: Establish agency type (exec, quasi, etc.)
     """
 
     agency_code = models.CharField("RIFANS Agency Code",
-                                   max_length=2)
+                                   max_length=2,
+                                   blank=True,
+                                   default='')
     duns_number = models.CharField("DUNS Number",
-                                   max_length=14)
+                                   max_length=14,
+                                   blank=True,
+                                   default='')
 
     class Meta:
         verbose_name_plural = 'State Agencies'
@@ -60,7 +68,9 @@ class SubRecipient(Organization):
     A recipient of State grant money. 
     """
     duns_number = models.CharField("DUNS Number",
-                                   max_length=14)
+                                   max_length=14,
+                                   blank=True,
+                                   default='')
 
     class Meta:
         verbose_name_plural = 'Sub-Recipients'
