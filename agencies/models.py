@@ -7,7 +7,8 @@ class Organization(models.Model):
     """
     Macro Organization class, from which agencies will inherit.   
     """
-    org_name = models.CharField(max_length=128)
+    org_name = models.CharField("Organization Name",
+                                max_length=128)
 
     class Meta():
         abstract = True
@@ -28,11 +29,15 @@ class FederalAgency(Organization):
         ('sub_tier', 'Sub-tier')
     )
 
-    cgac_code = models.CharField(max_length=3)
+    cgac_code = models.CharField("CGAC Code", max_length=3)
     federal_hierarchy_level = models.CharField(
+        "Federal Hierarchy Level",
         max_length=10,
         choices=HIERARCHY
     )
+
+    class Meta:
+        verbose_name_plural = 'Federal Agencies'
 
 
 class StateAgency(Organization):
@@ -42,8 +47,14 @@ class StateAgency(Organization):
 
     agency_code = models.CharField(max_length=2)
 
+    class Meta:
+        verbose_name_plural = 'State Agencies'
+
 
 class SubRecipient(Organization):
     """
 
     """
+
+    class Meta:
+        verbose_name_plural = 'Sub-Recipients'
