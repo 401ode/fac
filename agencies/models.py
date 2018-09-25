@@ -74,3 +74,33 @@ class SubRecipient(Organization):
 
     class Meta:
         verbose_name_plural = 'Sub-Recipients'
+
+
+class LineSequence(models.Model):
+    """
+
+    """
+    state_agency = models.ForeignKeyField('StateAgency',
+                                          required=True,
+                                          on_delete=models.CASCADE)
+    line_sequence_number = models.CharField()
+
+
+class IndirectRate(models.Model):
+    """
+
+    """
+    state_agency = models.ForeignKeyField('StateAgency',
+                                          required=True,
+                                          on_delete=models.CASCADE)
+    rate_percentage = models.DecimalField(
+        "Indirect Rate",
+        max_digits=4,
+        decimal_places=3
+    )
+    rate_start_date = models.DateField("Rate Start Date")
+    rate_end_date = models.DateField("Rate End Date")
+    rate_type = models.CharField(
+        "Rate Type",
+        max_length=32
+    )
